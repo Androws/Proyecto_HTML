@@ -1,38 +1,43 @@
 body {
   font-family: Verdana, sans-serif;
 }
-
 #reproductor {
   width: 80%;
   margin: auto;
   background: gray;
   border-radius: 15px 15px 15px 15px;
 }
-
 #cabecera {
   text-align: center;
   color: white;
   background: blue;
   border-radius: 15px 15px 0 0;
 }
-
 #controles {
   display: inline-block;
-  width: 100px;
+  width: 200px;
   margin: auto;
   margin-top: 2em;
+  text-align: center;
 }
-
+#controles .boton {
+  display: block;
+}
 #controles .boton:hover {
   cursor: pointer;
 }
-
+#volume {
+  position: absolute;
+  top: 18px;
+  right: 10%;
+  -webkit-appearance: slider-vertical;
+  height: 5em;
+}
 #lista {
   /*background: lightgray;*/
   margin-left: 1em;
   margin-bottom: 2em;
 }
-
 .song:hover {
   cursor: pointer;
   background: lightyellow;
