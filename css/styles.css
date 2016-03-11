@@ -1,0 +1,39 @@
+body {
+  font-family: Verdana, sans-serif;
+}
+
+#reproductor {
+  width: 80%;
+  margin: auto;
+  background: gray;
+  border-radius: 15px 15px 15px 15px;
+}
+
+#cabecera {
+  text-align: center;
+  color: white;
+  background: blue;
+  border-radius: 15px 15px 0 0;
+}
+
+#controles {
+  display: inline-block;
+  width: 100px;
+  margin: auto;
+  margin-top: 2em;
+}
+
+#controles .boton:hover {
+  cursor: pointer;
+}
+
+#lista {
+  /*background: lightgray;*/
+  margin-left: 1em;
+  margin-bottom: 2em;
+}
+
+.song:hover {
+  cursor: pointer;
+  background: lightyellow;
+}
