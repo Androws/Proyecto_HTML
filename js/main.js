@@ -1,6 +1,7 @@
 var selectedSong;
 
 function selectPlay(clickedId) {
+  var prevSong = selectedSong;
   selectedSong = clickedId;
 
   var divs = document.querySelectorAll(".song");
@@ -23,6 +24,9 @@ function selectPlay(clickedId) {
     //document.getElementById('aviso').innerHTML = "La canción seleccionada se está cargando.";
   }
   selectedSong.volume = document.getElementById("volume").value;
+
+  if(selectedSong == prevSong)
+    playorpause();
 }
 
 function playorpause() {

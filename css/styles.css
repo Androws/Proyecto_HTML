@@ -1,5 +1,6 @@
+@import url(https://fonts.googleapis.com/css?family=Lato);
 body {
-  font-family: Verdana, sans-serif;
+  font-family: 'Lato', sans-serif;
   background: lightblue;
   background: #4B79A1;
   background: -webkit-linear-gradient(to left, #4B79A1, #283E51);
@@ -32,10 +33,14 @@ body {
   text-align: center;
 }
 #controles .boton {
-  display: block;
+  display: inline-block;
+  text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.5);
 }
 #controles .boton:hover {
   cursor: pointer;
+}
+#controles .boton:active {
+  color: #404040;
 }
 #meter {
   width: 40%;
@@ -45,7 +50,7 @@ body {
 }
 progress::-webkit-progress-bar {
   background: #d1d1e0;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3) inset;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3) inset;
 }
 progress::-webkit-progress-value {
   background: rgba(0, 0, 0, 0.3);
@@ -85,7 +90,7 @@ progress::-webkit-progress-value {
 }
 .song:hover {
   cursor: pointer;
-  background: #f3f2f2;
+  background: #bfbfbf;
 }
 p {
   text-align: center;
