@@ -9,7 +9,7 @@ function selectPlay(clickedId) {
     divs[i].style.backgroundColor = "";
   }
 
-  selectedSong.parentElement.style.backgroundColor = "#b1afaf";
+  selectedSong.parentElement.style.backgroundColor = "#817e7e";
   selectedSong.onloadeddata = function() {
     document.getElementById('meter').max = selectedSong.duration; // Al cargar sonido
   }
@@ -28,7 +28,7 @@ function selectPlay(clickedId) {
 function playorpause() {
   var songs = document.querySelectorAll("#lista audio");
   for (var i = 0; i < songs.length; i++) {
-    if (!songs[i].paused && songs[i] != selectedSong) {
+    if (songs[i] != selectedSong) {
       console.log("Selected: " + selectedSong.getAttribute("id") + " Pausar: " + songs[i].getAttribute("id"));
       songs[i].pause();
       songs[i].currentTime = 0;
@@ -45,7 +45,7 @@ function playorpause() {
     document.getElementById("aviso").innerHTML = "La canción a reproducir no ha cargado."
   } else {
     selectedSong.pause();
-    selectedSong.parentElement.style.backgroundColor = "#b1afaf";
+    selectedSong.parentElement.style.backgroundColor = "#817e7e";
     document.getElementById("playpause").className = "boton fa fa-play fa-2x";
   }
 }
