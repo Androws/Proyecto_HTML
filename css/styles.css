@@ -1,17 +1,28 @@
 body {
   font-family: Verdana, sans-serif;
+  background: lightblue;
+  background: #4B79A1;
+  background: -webkit-linear-gradient(to left, #4B79A1, #283E51);
+  background: -webkit-linear-gradient(right, #4B79A1, #283E51);
+  background: linear-gradient(to left, #4B79A1, #283E51);
 }
 #reproductor {
   width: 80%;
   margin: auto;
-  background: gray;
+  margin-top: 2em;
   border-radius: 15px 15px 15px 15px;
+  box-shadow: inset 3px 3px 3px rgba(255, 255, 255, .2), inset -5px -3px 3px rgba(0, 0, 0, .1), 8px 8px 10px rgba(0, 0, 0, .3);
+  background: rgba(255, 255, 255, 1);
+  background: -webkit-linear-gradient(top, rgba(255, 255, 255, 1) 0%, rgba(246, 246, 246, 1) 45%, rgba(204, 204, 204, 1) 100%);
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 0%, rgba(246, 246, 246, 1) 45%, rgba(204, 204, 204, 1) 100%);
 }
 #cabecera {
   text-align: center;
-  color: white;
-  background: blue;
+  color: black;
+  background: #e8e8e8;
+  height: 130px;
   border-radius: 15px 15px 0 0;
+  box-shadow: inset 3px 3px 3px rgba(255, 255, 255, .7), inset -2px -2px 3px rgba(0, 0, 0, .1);
 }
 #controles {
   display: inline-block;
@@ -26,19 +37,77 @@ body {
 #controles .boton:hover {
   cursor: pointer;
 }
+#meter {
+  width: 40%;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+}
+progress::-webkit-progress-bar {
+  background: #d1d1e0;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3) inset;
+}
+progress::-webkit-progress-value {
+  background: rgba(0, 0, 0, 0.3);
+}
 #volume {
-  position: absolute;
-  top: 18px;
-  right: 10%;
   -webkit-appearance: slider-vertical;
+     -moz-appearance: slider-vertical;
+          appearance: slider-vertical;
   height: 5em;
 }
-#lista {
-  /*background: lightgray;*/
+#volumecontrol {
+  position: absolute;
+  top: 3.8em;
+  right: 10%;
+}
+#volumecontrol .fa-volume-up {
+  position: absolute;
+  top: -16px;
+  right: 60px;
+}
+#volumecontrol .fa-volume-down {
+  position: absolute;
+  right: 60px;
+}
+#cover {
+  display: inline-block;
+  width: 203px;
+  height: auto;
+  margin-top: 1em;
   margin-left: 1em;
-  margin-bottom: 2em;
+  float: left;
+}
+#lista {
+  margin-top: 12.5px;
+  margin-left: 240px;
+  margin-right: 50px;
 }
 .song:hover {
   cursor: pointer;
-  background: lightyellow;
+  background: #f3f2f2;
+}
+p {
+  text-align: center;
+}
+.separador {
+  height: 15px;
+}
+@media screen and (max-width:640px) {
+  #cover {
+    display: none;
+  }
+  #lista {
+    margin-left: 15px;
+  }
+}
+@media screen and (max-width:625px) {
+  #volumecontrol {
+    right: 5%;
+  }
+}
+@media screen and (max-width:480px) {
+  #volumecontrol {
+    right: 2%;
+  }
 }

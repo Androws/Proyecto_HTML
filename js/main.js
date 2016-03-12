@@ -9,18 +9,18 @@ function selectPlay(clickedId) {
     divs[i].style.backgroundColor = "";
   }
 
-  selectedSong.parentElement.style.backgroundColor = "lightblue";
+  selectedSong.parentElement.style.backgroundColor = "#b1afaf";
   selectedSong.onloadeddata = function() {
     document.getElementById('meter').max = selectedSong.duration; // Al cargar sonido
   }
   selectedSong.ontimeupdate = function(d) {
-    document.getElementById('meter').value = d.path[0].currentTime.toFixed(2);
-    document.getElementById('actual').textContent = formatSecondsAsTime(d.path[0].currentTime.toFixed(2));
-    document.getElementById('duracion').textContent = formatSecondsAsTime(d.path[0].duration.toFixed(2));
+    document.getElementById('meter').value = (selectedSong.currentTime / selectedSong.duration).toFixed(3);
+    document.getElementById('actual').textContent = formatSecondsAsTime(selectedSong.currentTime.toFixed(1));
+    document.getElementById('duracion').textContent = formatSecondsAsTime(selectedSong.duration.toFixed(1));
   }
 
-  selectedSong.onprogress = function () {
-    document.getElementById('aviso').textContent = "La canción seleccionada se está cargando."
+  selectedSong.onprogress = function() {
+    //document.getElementById('aviso').innerHTML = "La canción seleccionada se está cargando.";
   }
   selectedSong.volume = document.getElementById("volume").value;
 }
@@ -35,21 +35,24 @@ function playorpause() {
       document.getElementById("playpause").className = "boton fa fa-play fa-2x";
     }
   }
-  if (selectedSong.paused && selectedSong.readyState >= 4) {
+  if (selectedSong.paused && selectedSong.readyState > 3) {
     console.log(selectedSong.readyState);
     //console.log("Reproduciendo: " + console.log(selectedSong));
     selectedSong.play();
     selectedSong.parentElement.style.backgroundColor = "lightgreen";
     document.getElementById("playpause").className = "boton fa fa-pause fa-2x";
+  } else if (selectedSong.readyState <= 3) {
+    document.getElementById("aviso").innerHTML = "La canción a reproducir no ha cargado."
   } else {
     selectedSong.pause();
-    selectedSong.parentElement.style.backgroundColor = "lightblue";
+    selectedSong.parentElement.style.backgroundColor = "#b1afaf";
     document.getElementById("playpause").className = "boton fa fa-play fa-2x";
   }
 }
 
 function setVolume() {
-  selectedSong.volume = document.getElementById("volume").value;
+  if (selectedSong)
+    selectedSong.volume = document.getElementById("volume").value;
 }
 
 function formatSecondsAsTime(secs) {
