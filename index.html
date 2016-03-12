@@ -7,24 +7,29 @@
   <meta name="theme-color" content="#4B79A1">
   <meta name="keywords" content="reproductor, música, music, player, david, bowie, ziggy, stardust">
   <meta name="description" content="Reproductor de música realizado con HTML5 y JavaScript.">
+  <!--Facebook Meta Tags-->
   <meta property="og:type" content="article">
   <meta property="og:title" content="Reproductor de Música con HTML5 + JS">
   <meta property="og:image" content="https://files.catbox.moe/evnjkn.png">
   <meta property="og:description" content="Proyecto para el curso de Desarrollo Web con HTML5">
   <link rel="image_src" href="https://files.catbox.moe/evnjkn.png">
+  <!--Twitter Meta Tags-->
   <meta property="twitter:card" content="summary_large_image">
   <meta property="twitter:creator" content="@Androws_">
   <meta property="twitter:title" content="Reproductor de Música con HTML5 + JS">
   <meta property="twitter:description" content="Proyecto para el curso de Desarrollo Web con HTML5">
   <meta property="twitter:image:src" content="https://files.catbox.moe/evnjkn.png">
   <title>Reproductor de Música HTML5</title>
+  <!--Hojas de estilo CSS-->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="css/styles.css">
   <link rel="author" href="https://github.com/Androws">
+  <!--Favicons-->
   <link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32">
   <link rel="icon" type="image/png" href="android-chrome-192x192.png" sizes="192x192">
   <link rel="icon" type="image/png" href="favicon-96x96.png" sizes="96x96">
   <link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16">
+  <!--Script JS-->
   <script src="js/main.js"></script>
 </head>
 
@@ -32,14 +37,18 @@
   <div id=reproductor>
     <div id="cabecera">
       <div id="controles">
+        <!--Botón de Play/Pausa que llama a la función playorpause() en cada click -->
         <i class="boton fa fa-play fa-2x" id="playpause" onClick="playorpause()"></i>
+        <!--Controles de volumen, "range" e iconos-->
         <div id=volumecontrol>
           <i class="fa fa-volume-up"></i>
+          <!--Range que cambia el volumen mediante la función setVolume()-->
           <input type="range" orient="vertical" oninput="setVolume()" id="volume" min=0 max=1 step=0.01 value=0.5>
           <i class="fa fa-volume-down"></i>
         </div>
       </div>
       <div class="separador"></div>
+      <!--Barra de progreso y span con el tiempo actual y la duración de la canción-->
       <div id="progreso">
         <span id="actual">00:00</span>
         <progress id="meter" value="0" max="1">Tu navegador no soporta las barras de progreso.</progress>
@@ -48,6 +57,7 @@
       <div id="aviso">&nbsp;</div>
     </div>
     <img id="cover" src="https://files.catbox.moe/8w7cil.jpg" alt="Cover" />
+    <!--Lista de canciones-->
     <div id="lista">
       <div class="song" onClick="selectPlay(song1)">
         <audio preload="auto" id="song1" src="audio/ziggy/01-FiveYears.mp3"></audio>Five Years</div>

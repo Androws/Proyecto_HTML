@@ -1,18 +1,23 @@
+/*Se importa la fuente a utilizar*/
 @import url(https://fonts.googleapis.com/css?family=Lato);
 body {
   font-family: 'Lato', sans-serif;
-  background: lightblue;
+  /*Se establece un gradiente de fondo para la página*/
   background: #4B79A1;
   background: -webkit-linear-gradient(to left, #4B79A1, #283E51);
   background: -webkit-linear-gradient(right, #4B79A1, #283E51);
   background: linear-gradient(to left, #4B79A1, #283E51);
 }
 #reproductor {
+  /*Se centra y posiciona el reproductor*/
   width: 80%;
   margin: auto;
   margin-top: 2em;
+  /*Se redondean los bordes*/
   border-radius: 15px 15px 15px 15px;
+  /*Se le aplica una sombra y biselado*/
   box-shadow: inset 3px 3px 3px rgba(255, 255, 255, .2), inset -5px -3px 3px rgba(0, 0, 0, .1), 8px 8px 10px rgba(0, 0, 0, .3);
+  /*Se le aplica un degradado al fondo del reproductor*/
   background: rgba(255, 255, 255, 1);
   background: -webkit-linear-gradient(top, rgba(255, 255, 255, 1) 0%, rgba(246, 246, 246, 1) 45%, rgba(204, 204, 204, 1) 100%);
   background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 0%, rgba(246, 246, 246, 1) 45%, rgba(204, 204, 204, 1) 100%);
@@ -22,11 +27,14 @@ body {
   color: black;
   background: #e8e8e8;
   height: 130px;
+  /*Se redondean los bordes superiores de la cabecera*/
   border-radius: 15px 15px 0 0;
+  /*Se aplican sombras y biselado*/
   box-shadow: inset 3px 3px 3px rgba(255, 255, 255, .7), inset -2px -2px 3px rgba(0, 0, 0, .1);
 }
 #controles {
   display: inline-block;
+  /*Se centran y posicionan los controles*/
   width: 200px;
   margin: auto;
   margin-top: 2em;
@@ -34,48 +42,61 @@ body {
 }
 #controles .boton {
   display: inline-block;
+  /*Sombra para el botón de play/pausa*/
   text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.5);
 }
 #controles .boton:hover {
+  /*Al pasar el cursor por el botón se cambia a puntero*/
   cursor: pointer;
 }
 #controles .boton:active {
+  /*Se cambia el color del botón al hacer click*/
   color: #404040;
 }
 #meter {
+  /*Se establece el ancho de la barra de progreso y se resetea el estilo por defecto*/
   width: 40%;
   -webkit-appearance: none;
      -moz-appearance: none;
           appearance: none;
 }
 progress::-webkit-progress-bar {
+  /*Se cambia el color de fondo y se añade sombra a la barra de progreso.
+  Solo en Webkit*/
   background: #d1d1e0;
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3) inset;
 }
 progress::-webkit-progress-value {
+  /*Se cambia el color de la barra de progreso.
+  Solo en Webkit*/
   background: rgba(0, 0, 0, 0.3);
 }
 #volume {
+  /*El slider del "range" de volumen se debe mostrar verticalmente*/
   -webkit-appearance: slider-vertical;
      -moz-appearance: slider-vertical;
           appearance: slider-vertical;
   height: 5em;
 }
 #volumecontrol {
+  /*Posicionamiento del control de volumen*/
   position: absolute;
   top: 3.8em;
   right: 10%;
 }
 #volumecontrol .fa-volume-up {
+  /*Posicionamiento del icono de subir volumen*/
   position: absolute;
   top: -16px;
   right: 60px;
 }
 #volumecontrol .fa-volume-down {
+  /*Posicionamiento del icono de bajar volumen*/
   position: absolute;
   right: 60px;
 }
 #cover {
+  /*Posicionamiento de la portada del CD*/
   display: inline-block;
   width: 203px;
   height: auto;
@@ -84,21 +105,34 @@ progress::-webkit-progress-value {
   float: left;
 }
 #lista {
+  /*Posicionamiento de la lista de canciones*/
   margin-top: 12.5px;
   margin-left: 240px;
   margin-right: 50px;
 }
+.song {
+  /*El texto de las canciones no se puede seleccionar*/
+  -webkit-user-select:none;
+     -moz-user-select:none;
+      -ms-user-select:none;
+          user-select:none;
+}
 .song:hover {
+  /*Se cambia el color de fondo de las canciones al pasar el cursor.
+  Además se cambia el cursor por un puntero*/
   cursor: pointer;
   background: #bfbfbf;
 }
 p {
   text-align: center;
+  color: white;
 }
 .separador {
   height: 15px;
 }
+/*Media queries para diferentes tamaños de pantalla*/
 @media screen and (max-width:640px) {
+  /*Se oculta la portada en pantallas pequeñas*/
   #cover {
     display: none;
   }
@@ -106,6 +140,7 @@ p {
     margin-left: 15px;
   }
 }
+/*Reposicionamiento del control de volumen en pantallas pequeñas*/
 @media screen and (max-width:625px) {
   #volumecontrol {
     right: 5%;
