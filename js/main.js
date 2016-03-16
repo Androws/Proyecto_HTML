@@ -58,16 +58,16 @@ function playorpause(cambio) {
   }
   //Cuando se carga la canción, se establece el valor máximo de la barra de progreso
   currentSong.onloadeddata = function() {
-    document.getElementById('meter').max = currentSong.duration; // Al cargar sonido
-  }
-  /*Cada vez que se avanza en la canción, se cambia el valor de la barra de progreso,
-  y se actualizan los contadores de tiempo*/
+      document.getElementById('meter').max = currentSong.duration; // Al cargar sonido
+    }
+    /*Cada vez que se avanza en la canción, se cambia el valor de la barra de progreso,
+    y se actualizan los contadores de tiempo*/
   currentSong.ontimeupdate = function() {
-    document.getElementById('meter').value = (currentSong.currentTime / currentSong.duration).toFixed(3);
-    document.getElementById('actual').textContent = formatSecondsAsTime(currentSong.currentTime.toFixed(1));
-    document.getElementById('duracion').textContent = formatSecondsAsTime(currentSong.duration.toFixed(1));
-  }
-  //El volumen de la canción es indicado por el "range" de volumen
+      document.getElementById('meter').value = (currentSong.currentTime / currentSong.duration).toFixed(3);
+      document.getElementById('actual').textContent = formatSecondsAsTime(currentSong.currentTime.toFixed(1));
+      document.getElementById('duracion').textContent = formatSecondsAsTime(currentSong.duration.toFixed(1));
+    }
+    //El volumen de la canción es indicado por el "range" de volumen
   currentSong.volume = document.getElementById("volume").value;
 }
 
@@ -91,4 +91,33 @@ function formatSecondsAsTime(secs) {
   }
 
   return min + ':' + sec;
+}
+
+function allowDrop(ev) {
+  ev.stopPropagation();
+  ev.preventDefault();
+}
+
+function drop(ev) {
+  ev.stopPropagation();
+  ev.preventDefault();
+
+  var audios = ev.dataTransfer.files;
+  var uris = [];
+  console.log(audios);
+  for (i = 0; i < audios.length; i++) {
+    var file = audios[i];
+    var reader = new FileReader();
+
+    reader.onloadend = function(test) {
+      var audio = document.createElement("audio");
+      audio.setAttribute("src", test.target.result);
+      audio.setAttribute("controls", '');
+      document.body.appendChild(audio);
+    }
+
+    if(file) {
+      reader.readAsDataURL(file);
+    }
+  }
 }
