@@ -2,6 +2,15 @@
 var selectedSong;
 var currentSong;
 
+
+document.addEventListener('DOMContentLoaded', function() {
+  var listaDrop = document.getElementById("lista");
+  listaDrop.addEventListener("dragleave", restaurarLista);
+  listaDrop.addEventListener("drop", drop);
+  listaDrop.addEventListener("dragover", allowDrop);
+});
+
+
 //Función para seleccionar una canción
 function selectPlay(clickedId) {
   var hijos = clickedId.children;
@@ -100,16 +109,17 @@ function formatSecondsAsTime(secs) {
   return min + ':' + sec;
 }
 
-function allowDrop(ev) {
-  ev.stopPropagation();
-  ev.preventDefault();
+allowDrop = function () {
+  event.stopPropagation();
+  event.preventDefault();
+  document.getElementById("lista").classList.add("lista-drag");
 }
 
-function drop(ev) {
-  ev.stopPropagation();
-  ev.preventDefault();
+drop = function () {
+  event.stopPropagation();
+  event.preventDefault();
 
-  var audios = ev.dataTransfer.files;
+  var audios = event.dataTransfer.files;
 
   var lista = document.getElementById("lista");
   //Borrando los hijos actuales de lista.
@@ -117,30 +127,34 @@ function drop(ev) {
     lista.removeChild(lista.firstChild);
   }
 
+  /*se oculta la portada cuando se cargan canciones del usuario
+  y se recoloca la lista*/
+  document.getElementById("cover").style.display = "none";
+  lista.style.marginLeft = "50px"
+
   for (i = 0; i < audios.length; i++) {
     var file = audios[i];
     var reader = new FileReader();
-    var nombre = "pepe";
-    jsmediatags.read(file, {
-      onSuccess: function(tag) {
-        var tags = tag.tags;
-        nombre = tags.artist + " - " + tags.title;
-        console.log(nombre);
-      }
-    });
-    //console.log(nombre);
-    reader.fileName = file.name;
+
+    reader.file = file;
     reader.onload = function() {
       var divAudio = document.createElement("div");
-      divAudio.className = "song";
+      divAudio.classList.add("song");
       divAudio.addEventListener("click", function() {
         selectPlay(this);
       });
       var audio = document.createElement("audio");
       audio.setAttribute("src", this.result); //e.target.result
       //audio.setAttribute("controls", '');
-      divAudio.textContent += this.fileName;
       divAudio.appendChild(audio);
+      jsmediatags.read(this.file, {
+        onSuccess: function(tag) {
+          var tags = tag.tags;
+          nombre = tags.artist + " - " + tags.title;
+          divAudio.setAttribute("data-title", nombre);
+          addTitle(divAudio);
+        }
+      });
       lista.appendChild(divAudio);
     }
 
@@ -148,4 +162,15 @@ function drop(ev) {
       reader.readAsDataURL(file);
     }
   }
+  restaurarLista();
+}
+
+function addTitle(div) {
+  var span = document.createElement("span");
+  span.textContent += div.getAttribute("data-title");
+  div.appendChild(span);
+}
+
+var restaurarLista = function () {
+  document.getElementById("lista").classList.remove("lista-drag");
 }

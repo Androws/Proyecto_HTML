@@ -110,6 +110,9 @@ progress::-webkit-progress-value {
   margin-left: 240px;
   margin-right: 50px;
 }
+.lista-drag {
+  background-color: lightblue;
+}
 .song {
   /*El texto de las canciones no se puede seleccionar*/
   -webkit-user-select:none;
@@ -137,7 +140,7 @@ p {
     display: none;
   }
   #lista {
-    margin-left: 15px;
+    margin-left: 50px;
   }
 }
 /*Reposicionamiento del control de volumen en pantallas pequeñas*/
