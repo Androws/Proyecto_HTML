@@ -103,17 +103,22 @@ function drop(ev) {
   ev.preventDefault();
 
   var audios = ev.dataTransfer.files;
-  var uris = [];
-  console.log(audios);
   for (i = 0; i < audios.length; i++) {
     var file = audios[i];
     var reader = new FileReader();
 
-    reader.onloadend = function(test) {
+    reader.onloadend = function(e) { //poner id a los audios en función del número de canción
+      //mejor borrar la lista anterior de canciones para hacer esto
+      //meter a los divs el selectPlay con la id adecuada
+      //forazo
+      var lista = document.getElementById("lista");
+      var divAudio = document.createElement("div");
+      divAudio.className = "song";
+      divAudio.setAttribute("onClick()", "selectPlay(song12)");
       var audio = document.createElement("audio");
-      audio.setAttribute("src", test.target.result);
+      audio.setAttribute("src", e.target.result);
       audio.setAttribute("controls", '');
-      document.body.appendChild(audio);
+      lista.appendChild(audio);
     }
 
     if(file) {
