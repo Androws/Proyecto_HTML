@@ -1,12 +1,19 @@
+//var jsmediatags = require("jsmediatags");
 var selectedSong;
 var currentSong;
 
 //Función para seleccionar una canción
 function selectPlay(clickedId) {
+  var hijos = clickedId.children;
+
   //se almacena la canción seleccionada anteriormente
   var prevSong = selectedSong;
-  selectedSong = clickedId;
 
+  for (i = 0; i < hijos.length; i++) {
+    if (hijos[i].hasAttribute("src")) {
+      selectedSong = hijos[i];
+    }
+  }
   var divs = document.querySelectorAll(".song");
 
   //Una vez seleccionada una canción se deselecciona el resto
@@ -103,25 +110,41 @@ function drop(ev) {
   ev.preventDefault();
 
   var audios = ev.dataTransfer.files;
+
+  var lista = document.getElementById("lista");
+  //Borrando los hijos actuales de lista.
+  while (lista.firstChild) {
+    lista.removeChild(lista.firstChild);
+  }
+
   for (i = 0; i < audios.length; i++) {
     var file = audios[i];
     var reader = new FileReader();
-
-    reader.onloadend = function(e) { //poner id a los audios en función del número de canción
-      //mejor borrar la lista anterior de canciones para hacer esto
-      //meter a los divs el selectPlay con la id adecuada
-      //forazo
-      var lista = document.getElementById("lista");
+    var nombre = "pepe";
+    jsmediatags.read(file, {
+      onSuccess: function(tag) {
+        var tags = tag.tags;
+        nombre = tags.artist + " - " + tags.title;
+        console.log(nombre);
+      }
+    });
+    //console.log(nombre);
+    reader.fileName = file.name;
+    reader.onload = function() {
       var divAudio = document.createElement("div");
       divAudio.className = "song";
-      divAudio.setAttribute("onClick()", "selectPlay(song12)");
+      divAudio.addEventListener("click", function() {
+        selectPlay(this);
+      });
       var audio = document.createElement("audio");
-      audio.setAttribute("src", e.target.result);
-      audio.setAttribute("controls", '');
-      lista.appendChild(audio);
+      audio.setAttribute("src", this.result); //e.target.result
+      //audio.setAttribute("controls", '');
+      divAudio.textContent += this.fileName;
+      divAudio.appendChild(audio);
+      lista.appendChild(divAudio);
     }
 
-    if(file) {
+    if (file) {
       reader.readAsDataURL(file);
     }
   }
