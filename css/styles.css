@@ -126,9 +126,24 @@ progress::-webkit-progress-value {
   cursor: pointer;
   background: #bfbfbf;
 }
+/*Important para que el hover no las sobreescriba*/
+.song-playing{
+  background-color: lightgreen!important;
+}
+.song-selected {
+  background-color: #817e7e!important;
+}
 p {
   text-align: center;
   color: white;
+}
+#inst{
+  font-size:18px;
+  margin-left: 40px;
+  margin-right: 40px;
+}
+#chrome {
+  font-style: italic;
 }
 .separador {
   height: 15px;

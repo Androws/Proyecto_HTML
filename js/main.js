@@ -27,10 +27,11 @@ function selectPlay(clickedId) {
 
   //Una vez seleccionada una canción se deselecciona el resto
   for (var i = 0; i < divs.length; i++) {
-    divs[i].style.backgroundColor = "";
+    divs[i].classList.remove("song-selected");
   }
   //Se aplica un color a la canción seleccionada
-  selectedSong.parentElement.style.backgroundColor = "#817e7e";
+  selectedSong.parentElement.classList.add("song-selected");
+  //selectedSong.parentElement.style.backgroundColor = "#817e7e";
 
   /*Si la canción seleccionada es la misma que estaba seleccionada antes
   se reproduce directamente la canción seleccionada (doble click)*/
@@ -44,6 +45,7 @@ function playorpause(cambio) {
   document.getElementById("aviso").innerHTML = "";
   //Si se está reproduciendo una canción cuando se pulsa el botón, se pausa.
   if (currentSong && !currentSong.paused) {
+    currentSong.parentElement.classList.remove("song-playing");
     currentSong.pause();
     /*Si se ha seleccionado otra canción, también se pone
     el tiempo de la canción anterior a 0 (stop)*/
@@ -60,7 +62,8 @@ function playorpause(cambio) {
     selectedSong.play();
     currentSong = selectedSong;
     //La canción que se reproduce tiene un fondo verde
-    currentSong.parentElement.style.backgroundColor = "lightgreen";
+    currentSong.parentElement.classList.remove("song-selected");
+    currentSong.parentElement.classList.add("song-playing");
     //Se cambia el botón al botón de pausa.
     document.getElementById("playpause").className = "boton fa fa-pause fa-2x";
   } else if (selectedSong.readyState <= 3) {
@@ -69,7 +72,8 @@ function playorpause(cambio) {
   } else {
     //Si la canción seleccionada no estaba pausada, se pausa.
     selectedSong.pause();
-    selectedSong.parentElement.style.backgroundColor = "#817e7e";
+    selectedSong.parentElement.classList.remove("song-playing");
+    selectedSong.parentElement.classList.add("song-selected");
     document.getElementById("playpause").className = "boton fa fa-play fa-2x";
   }
   //Cuando se carga la canción, se establece el valor máximo de la barra de progreso
@@ -82,6 +86,9 @@ function playorpause(cambio) {
       document.getElementById('meter').value = (currentSong.currentTime / currentSong.duration).toFixed(3);
       document.getElementById('actual').textContent = formatSecondsAsTime(currentSong.currentTime.toFixed(1));
       document.getElementById('duracion').textContent = formatSecondsAsTime(currentSong.duration.toFixed(1));
+    }
+    currentSong.onended = function() {
+      currentSong.classList.remove("song-playing");
     }
     //El volumen de la canción es indicado por el "range" de volumen
   currentSong.volume = document.getElementById("volume").value;
@@ -109,13 +116,13 @@ function formatSecondsAsTime(secs) {
   return min + ':' + sec;
 }
 
-allowDrop = function () {
+allowDrop = function() {
   event.stopPropagation();
   event.preventDefault();
   document.getElementById("lista").classList.add("lista-drag");
 }
 
-drop = function () {
+drop = function() {
   event.stopPropagation();
   event.preventDefault();
 
@@ -153,6 +160,10 @@ drop = function () {
           nombre = tags.artist + " - " + tags.title;
           divAudio.setAttribute("data-title", nombre);
           addTitle(divAudio);
+        },
+        onError: function(error) {
+          divAudio.setAttribute("data-title", file.name);
+          addTitle(divAudio);
         }
       });
       lista.appendChild(divAudio);
@@ -171,6 +182,6 @@ function addTitle(div) {
   div.appendChild(span);
 }
 
-var restaurarLista = function () {
+var restaurarLista = function() {
   document.getElementById("lista").classList.remove("lista-drag");
 }
